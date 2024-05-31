@@ -1,6 +1,7 @@
 package dev.moinak.commands;
 
 import dev.moinak.commands.subs.LineCountCommand;
+import dev.moinak.commands.subs.WordCountCommand;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -15,7 +16,8 @@ import java.util.concurrent.Callable;
         requiredOptionMarker = '*',
         commandListHeading = "%n Sub commands are: %n",
         subcommands = {
-                LineCountCommand.class
+                LineCountCommand.class,
+                WordCountCommand.class
         }
 )
 public class CountCommand implements Callable<Integer> {
@@ -26,8 +28,8 @@ public class CountCommand implements Callable<Integer> {
 
         try {
             new CommandLine(new CountCommand()).execute(
-                    "linecount",
-                    "-f C:\\PARTITION-DEV\\Inventory_Management_System\\ims_server\\src"
+                    "wordcount",
+                    "--help"
             );
             System.exit(0);
         }

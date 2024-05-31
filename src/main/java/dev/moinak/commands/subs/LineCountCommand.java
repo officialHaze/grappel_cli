@@ -25,7 +25,7 @@ public class LineCountCommand implements Callable<Integer> {
     String filepath;
 
     @CommandLine.Option(
-            names = {"-rf", "--recursive"},
+            names = {"-r", "--rf"},
             description = "Recursively read files in every directory and count the total lines"
     )
     boolean rf;
