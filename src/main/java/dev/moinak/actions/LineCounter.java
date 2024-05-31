@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class LineCounter {
 
-    private boolean isRecursive;
+    private final boolean isRecursive;
     private String filepath;
 
     int totalLines = 0;

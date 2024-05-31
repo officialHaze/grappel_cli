@@ -1,7 +1,6 @@
 package dev.moinak.commands;
 
 import dev.moinak.commands.subs.LineCountCommand;
-import dev.moinak.commands.subs.WordCountCommand;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -17,19 +16,15 @@ import java.util.concurrent.Callable;
         commandListHeading = "%n Sub commands are: %n",
         subcommands = {
                 LineCountCommand.class,
-                WordCountCommand.class
         }
 )
 public class CountCommand implements Callable<Integer> {
-
-
 
     public static void main(String[] args) {
 
         try {
             new CommandLine(new CountCommand()).execute(
-                    "wordcount",
-                    "--help"
+                    "line", "-f C:\\PARTITION-DEV\\TaxEve\\project1099\\project1099\\src", "--rf"
             );
             System.exit(0);
         }
