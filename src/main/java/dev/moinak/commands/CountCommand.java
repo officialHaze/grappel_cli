@@ -1,13 +1,12 @@
 package dev.moinak.commands;
 
 import dev.moinak.commands.subs.LineCountCommand;
-import dev.moinak.commands.subs.WordCountCommand;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Count command",
+        header = "Count total lines of text or code in a text file or recursively through the entire project",
         name = "count",
         description = "Count contents of a file",
         separator = " ",
@@ -17,28 +16,9 @@ import java.util.concurrent.Callable;
         commandListHeading = "%n Sub commands are: %n",
         subcommands = {
                 LineCountCommand.class,
-                WordCountCommand.class
         }
 )
 public class CountCommand implements Callable<Integer> {
-
-
-
-    public static void main(String[] args) {
-
-        try {
-            new CommandLine(new CountCommand()).execute(
-                    "wordcount",
-                    "--help"
-            );
-            System.exit(0);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-    }
 
     @Override
     public Integer call() throws Exception {

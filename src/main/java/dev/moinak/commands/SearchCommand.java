@@ -1,17 +1,16 @@
 package dev.moinak.commands;
 
-import dev.moinak.actions.TextSearcher;
-import dev.moinak.utils.FileLine;
-import dev.moinak.utils.FileReaderApi;
+import dev.moinak.actions.TextFinder;
+import dev.moinak.utils.TextOccurrence;
 import picocli.CommandLine;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Search command",
+        header = "Search for a text or word in a text file or recursively through the entire project",
         name = "search",
-        description = "Search for a particular string in a file",
+        description = "Find all the occurences of a given word / text in a text file",
         separator = " ",
         mixinStandardHelpOptions = true,
         optionListHeading = "%n Options are: %n",
@@ -27,27 +26,34 @@ public class SearchCommand implements Callable<Integer> {
     String filepath;
 
     @CommandLine.Option(
-            names = {"-s", "--string"},
+            names = {"-t", "--text"},
             description = "The text or string to search for",
             required = true
     )
-    String string;
+    String text;
 
-    public static void main(String[] args) {
-
-        new CommandLine(new SearchCommand()).execute(
-                "--help"
-        );
-    }
+    @CommandLine.Option(
+            names = {"-r", "--rf"},
+            description = "Recursively read files in every directory and count the occurences of the given word / text"
+    )
+    boolean rf;
 
     @Override
     public Integer call() throws Exception {
 
-        FileReaderApi fileReader = new FileReaderApi(filepath);
+        TextFinder textFinder = new TextFinder(filepath, text, rf);
+        textFinder.find();
+        System.out.println();
+        System.out.println("The given text appeared in: ");
+        ArrayList<TextOccurrence> occurences = textFinder.getOccurences();
+        for (TextOccurrence occurrence: occurences) {
+            System.out.println("Filename: " + occurrence.getOccurrenceFilename());
+            System.out.println("Text: " + occurrence.getOccurrenceText());
+            System.out.println("Line number: " + occurrence.getOccurrenceLineNum());
+            System.out.println();
+        }
 
-        ArrayList<FileLine> lines = fileReader.getLines();
-
-        new TextSearcher(lines, string).search();
+        System.out.println("Total occurences of the given text: " + textFinder.getTotalOccurencesNumber());
 
         return 0;
     }
