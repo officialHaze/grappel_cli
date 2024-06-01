@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Search command",
+        header = "Search for a text or word in a text file or recursively through the entire project",
         name = "search",
         description = "Find all the occurences of a given word / text in a text file",
         separator = " ",
@@ -37,15 +37,6 @@ public class SearchCommand implements Callable<Integer> {
             description = "Recursively read files in every directory and count the occurences of the given word / text"
     )
     boolean rf;
-
-    public static void main(String[] args) {
-
-        new CommandLine(new SearchCommand()).execute(
-                "-f C:\\PARTITION-DEV\\Inventory_Management_System\\ims_server\\src",
-                "-r",
-                "-t db"
-        );
-    }
 
     @Override
     public Integer call() throws Exception {

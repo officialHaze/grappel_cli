@@ -6,7 +6,7 @@ import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Count command",
+        header = "Count total lines of text or code in a text file or recursively through the entire project",
         name = "count",
         description = "Count contents of a file",
         separator = " ",
@@ -19,21 +19,6 @@ import java.util.concurrent.Callable;
         }
 )
 public class CountCommand implements Callable<Integer> {
-
-    public static void main(String[] args) {
-
-        try {
-            new CommandLine(new CountCommand()).execute(
-                    "line", "-f C:\\PARTITION-DEV\\TaxEve\\project1099\\project1099\\src", "--rf"
-            );
-            System.exit(0);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-    }
 
     @Override
     public Integer call() throws Exception {
