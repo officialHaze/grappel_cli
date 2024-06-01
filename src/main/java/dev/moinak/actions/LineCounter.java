@@ -40,9 +40,12 @@ public class LineCounter {
                 count();
             }
         }
-        else if (file.isDirectory() && !isRecursive) System.out.println("The provided filepath represents a directory not a file. To start execution in a directory follow the recursive approach by passing the -rf option");
+        else if (file.isDirectory() && !isRecursive)
+            System.out.println("The provided filepath represents a directory not a file." +
+                    "To start execution in a directory follow the " +
+                    "recursive approach by passing the --rf option");
         else {
-            // Count the total lines in file
+            // Count the total lines of text in file
             FileReaderApi fileReader = new FileReaderApi(filepath);
             ArrayList<FileLine> lines = fileReader.getLines();
             totalLines += lines.size();
