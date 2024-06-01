@@ -6,12 +6,12 @@ import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Count total lines in a text file",
+        header = "Count total lines of text in a single file or recursively through the entire project",
         name = "line",
-        description = "This is a sub command of the parent Count command to count the total lines in a text file",
+        description = "Sub command to count total lines of text",
         separator = " ",
         mixinStandardHelpOptions = true,
-        optionListHeading = "%n Options are: %n",
+        optionListHeading = "%n Options: %n",
         requiredOptionMarker = '*'
 
 )

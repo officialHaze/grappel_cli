@@ -6,7 +6,7 @@ import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Count total lines of text or code in a text file or recursively through the entire project",
+        header = "Count contents of a file",
         name = "count",
         description = "Count contents of a file",
         separator = " ",

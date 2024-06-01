@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        header = "Search for a text or word in a text file or recursively through the entire project",
+        header = "Search for the total occurences of a text / word in a single file or recursively through the entire project",
         name = "search",
-        description = "Find all the occurences of a given word / text in a text file",
+        description = "Find all the occurences of a given word / text in a file",
         separator = " ",
         mixinStandardHelpOptions = true,
         optionListHeading = "%n Options are: %n",
@@ -44,7 +44,7 @@ public class SearchCommand implements Callable<Integer> {
         TextFinder textFinder = new TextFinder(filepath, text, rf);
         textFinder.find();
         System.out.println();
-        System.out.println("The given text appeared in: ");
+        System.out.println("Text found in the following places: ");
         ArrayList<TextOccurrence> occurences = textFinder.getOccurences();
         for (TextOccurrence occurrence: occurences) {
             System.out.println("Filename: " + occurrence.getOccurrenceFilename());
@@ -53,7 +53,7 @@ public class SearchCommand implements Callable<Integer> {
             System.out.println();
         }
 
-        System.out.println("Total occurences of the given text: " + textFinder.getTotalOccurencesNumber());
+        System.out.println("Total occurrence(s) of the given text: " + textFinder.getTotalOccurencesNumber());
 
         return 0;
     }
